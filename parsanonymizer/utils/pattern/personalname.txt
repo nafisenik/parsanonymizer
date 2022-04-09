@@ -1,0 +1,4 @@
+# Personal Names
+FNAME
+LNAME
+FNAME<>CNJ<>LNAME
