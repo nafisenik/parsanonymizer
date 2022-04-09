@@ -1,7 +1,7 @@
 import re
 from typing import Dict
 import numpy as np
-from parstdex.utils import const
+from parsanonymizer.utils import const
 
 
 def merge_spans(spans: Dict, text: str):
@@ -13,6 +13,13 @@ def merge_spans(spans: Dict, text: str):
 
     encoded['personalname'] = encode_space(encoded['personalname'], spans['space'])
     result['personalname'] = find_spans(encoded['personalname'])
+
+    encoded['companynames'] = encode_span(spans['companynames'],
+                                  spans['adversarial'],
+                                  text)
+
+    encoded['companynames'] = encode_space(encoded['companynames'], spans['space'])
+    result['companynames'] = find_spans(encoded['companynames'])
 
     return result
 

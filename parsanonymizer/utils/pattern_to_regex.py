@@ -1,6 +1,7 @@
 import re
 import os
-from parstdex.utils.normalizer import Normalizer
+from parsanonymizer.utils.normalizer import Normalizer
+#from parstdex.utils.normalizer import Normalizer
 
 
 def process_file(path):
