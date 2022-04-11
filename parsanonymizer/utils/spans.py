@@ -7,27 +7,10 @@ from parsanonymizer.utils import const
 def merge_spans(spans: Dict, text: str):
     result, encoded = dict(), dict()
 
-    encoded['personalname'] = encode_span(spans['personalname'],
-                                  spans['adversarial'],
-                                  text)
-
-    encoded['personalname'] = encode_space(encoded['personalname'], spans['space'])
-    result['personalname'] = find_spans(encoded['personalname'])
-
-    encoded['companynames'] = encode_span(spans['companynames'],
-                                  spans['adversarial'],
-                                  text)
-
-    encoded['companynames'] = encode_space(encoded['companynames'], spans['space'])
-    result['companynames'] = find_spans(encoded['companynames'])
-
-
-    encoded['melicode'] = encode_span(spans['melicode'],
-                                  spans['adversarial'],
-                                  text)
-
-    encoded['melicode'] = encode_space(encoded['melicode'], spans['space'])
-    result['melicode'] = find_spans(encoded['melicode'])
+    for key in spans.keys():
+        encoded[key] = encode_span(spans[key], spans['adversarial'], text)
+        encoded[key] = encode_space(encoded[key], spans['space'])
+        result[key] = find_spans(encoded[key])
 
     return result
 

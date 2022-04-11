@@ -1,7 +1,22 @@
-﻿personalname:
+﻿
+adversarial:
 
-علیپور علی‌پور
 companynames:
+شرکت گوگل
+یاهو
+
+email:
+a@s.com
+ss.sawe_c@sdgm.c
+sss@sss.com
 
 melicode:
+1237651212
 
+personalname:
+علی
+زهرا - محمدی
+محمدی
+امیری
+
+space:
