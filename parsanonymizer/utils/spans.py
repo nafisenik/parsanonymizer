@@ -21,18 +21,26 @@ def merge_spans(spans: Dict, text: str):
     encoded['companynames'] = encode_space(encoded['companynames'], spans['space'])
     result['companynames'] = find_spans(encoded['companynames'])
 
+
+    encoded['melicode'] = encode_span(spans['melicode'],
+                                  spans['adversarial'],
+                                  text)
+
+    encoded['melicode'] = encode_space(encoded['melicode'], spans['space'])
+    result['melicode'] = find_spans(encoded['melicode'])
+
     return result
 
 
-def create_spans(patterns, text):
+def create_spans(regexes, text):
     # add pattern keys to dictionaries and define a list structure for each key
     spans = {}
-    for key in patterns.regexes.keys():
-        spans[key]: list = []
+    for key in regexes.keys():
+        spans[key] = []
 
     # apply regexes on normalized sentence and store extracted markers
-    for key in patterns.regexes.keys():
-        for regex_value in patterns.regexes[key]:
+    for key in regexes.keys():
+        for regex_value in regexes[key]:
             # apply regex
             matches = list(
                 re.finditer(
@@ -105,16 +113,3 @@ def encode_space(encoded_sent, space_spans):
 
     return encoded_sent
 
-
-def sgn(num: int):
-    if num >= 1:
-        return 1
-    elif num <= -1:
-        return -1
-    else:
-        return 0
-
-
-def merge_encodings(encoded_time, encoded_date):
-    merged_encoding = [sgn(a+b) for a, b in zip(encoded_time, encoded_date)]
-    return merged_encoding

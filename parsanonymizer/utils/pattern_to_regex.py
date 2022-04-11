@@ -1,13 +1,13 @@
 import re
 import os
-from parsanonymizer.utils.normalizer import Normalizer
-#from parstdex.utils.normalizer import Normalizer
+from parsanonymizer.utils import const
+
 
 
 def process_file(path):
     with open(path, 'r', encoding='utf-8-sig') as file:
         text = file.readlines()
-        text = [x.rstrip() for x in text if not x.startswith('#') and len(x.strip()) > 0]  # remove \n
+        text = [x.strip() for x in text if not x.startswith('#') and len(x.strip()) > 0]  # remove \n
         return text
 
 
@@ -19,16 +19,15 @@ class Annotation:
     """
 
     annotation_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'annotation')
-
     annotations_dict = {}
 
     def __init__(self):
-        # numbers annotation
-        numbers_annotations = self.create_number_annotation_dict()
+        # regex_annotations
+        regex_annotations = self.create_regex_annotation_dict()
         # time annotation dictionary includes all annotations of time folder
         main_annotations = self.create_annotation_dict(self.annotation_path)
 
-        self.annotations_dict = {**numbers_annotations,
+        self.annotations_dict = {**regex_annotations,
                                  **main_annotations}
 
     @staticmethod
@@ -38,10 +37,11 @@ class Annotation:
         return annotation_mark
 
     @staticmethod
-    def create_number_annotation_dict():
+    def create_regex_annotation_dict():
         annotation_dict = {
             'NUM10': r'\\d{10}', 
-            'NUMR10': r'[0-9]{10}'
+            'NUMR10': r'[0-9]{10}',
+            'FMPF': fr'(\\u200c)?[{const.FA_ALPHABET}]+[^\\s]',
         }
 
         return annotation_dict

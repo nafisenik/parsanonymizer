@@ -9,7 +9,15 @@ class Model(object):
         # Normalizer: convert arabic YE and KAF to persian ones.
         self.normalizer = Normalizer()
         # Patterns: patterns to regex generator
-        self.patterns = Patterns()
+        self.regexes = Patterns().regexes
+        with open ('regexes.txt', 'w', encoding='utf-8-sig') as f:
+            for key in self.regexes.keys():
+                f.write(f'{key}\n\n')
+                for regex in self.regexes[key]:
+                    f.write(f'{regex}\n')
+                f.write('\n')
+
+
         super(Model, self).__init__()
 
     def extract_span(self, text: str):
@@ -18,7 +26,7 @@ class Model(object):
         text = self.normalizer.normalize(text)
 
         # Create spans
-        spans = create_spans(self.patterns, text)
+        spans = create_spans(self.regexes, text)
         spans = merge_spans(spans, text)
 
         return spans
