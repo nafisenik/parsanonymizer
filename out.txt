@@ -2,28 +2,25 @@
 adversarial:
 
 companynames:
-شرکت گوگل
-یاهو
 
 email:
-a@s.com
-ss.sawe_c@sdgm.c
-sss@sss.com
 
 melicode:
-1237651212
+9133123121
+9133123123
+9133123125
 
 personalname:
-علی
-زهرا - محمدی
-محمدی
-امیری
+
+phonenumber:
+9133123121
+9133123123
+09133123124
+9133123125
+0913 312 31 27
+0913-312-3128
+09133123120
 
 url:
-s.com
-ss.sawe_c@sdgm.c
-https://google.com
-hello.com
-sss.com
 
 space:
