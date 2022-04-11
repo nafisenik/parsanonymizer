@@ -19,4 +19,11 @@ personalname:
 محمدی
 امیری
 
+url:
+s.com
+ss.sawe_c@sdgm.c
+https://google.com
+hello.com
+sss.com
+
 space:
