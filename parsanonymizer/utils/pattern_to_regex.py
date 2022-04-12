@@ -20,15 +20,19 @@ class Annotation:
 
     annotation_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'annotation')
     annotations_dict = {}
-
+    
     def __init__(self):
         # regex_annotations
         regex_annotations = self.create_regex_annotation_dict()
         # time annotation dictionary includes all annotations of time folder
         main_annotations = self.create_annotation_dict(self.annotation_path)
 
+
         self.annotations_dict = {**regex_annotations,
                                  **main_annotations}
+
+
+
 
     @staticmethod
     def create_annotation(path):
@@ -41,10 +45,12 @@ class Annotation:
         annotation_dict = {
             'NUM10': r'\\d{10}', 
             'NUMR10': r'[0-9]{10}',
+            'PASSNO': r'[A-Z][0-9]{8}',
             'FMPF': fr'(\\u200c)?[{const.FA_ALPHABET}]+[^\\s]',
             'EMAIL': r"""(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])""",
             'URL': r"""((http|ftp|https):\\/\\/)?([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])""",
-            'PHONENUMBER': r"""(((([+]|00)98)[-\\s]?)|0)?9\\d{2}[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}(?!\\d)"""
+            'PHONENUMBER': r"""(((([+]|00)98)[-\\s]?)|0)?9\\d{2}[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}(?!\\d)""",
+            'CARDNUM': r'(\\d{2})(-|_|\\s{1,3})?(\\d{4})(-|_|\\s{1,3})?(\\d{4})'
         }
 
         return annotation_dict

@@ -17,9 +17,13 @@ sent = """
 09133123120
 +989133123120cls
 """
+
+sent = '2071-7789-9070-7878 سلام DE12345678901234567890 , AE12345678901234567890, DE12345678901234567890'
 # sent = 'علیپور علی‌پور رفت '
 # sent = "https://google.com"
 # sent = "this is my حات جطرو https://google.com/hi سلام hello"
+#sent = "نفیسه +989133123121 و علی و @sdfafs مح a@s.com مد و sss زهرا  09222221133- محمدی ss.sawe_c@sdgm.c به شرکت گوگل و یاهو https://google.com رفتند و   1237651212 حسن جعفری و اکبری و hello.com محمدی sss@sss.com و امیری به آقای محمد حسینی سلام کردند."
+
 spans = m.extract_span(sent)
 
 with open('out.txt', 'w', encoding='utf-8-sig') as f:
