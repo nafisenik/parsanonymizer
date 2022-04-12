@@ -1,4 +1,4 @@
-import regex as re
+import re
 import os
 from parsanonymizer.utils import const
 
@@ -39,6 +39,8 @@ class Annotation:
     @staticmethod
     def create_regex_annotation_dict():
         annotation_dict = {
+            'ACCNUM': fr"""({const.SHOMARE})? ({const.HESAB}) .{{0,15}} [0-9]{{8,16}}""",
+            'SHABA': r"""IR[0-9]{22,24}""",
             'NUM10': r'\\d{10}', 
             'NUMR10': r'[0-9]{10}',
             'FMPF': fr'(\\u200c)?[{const.FA_ALPHABET}]+[^\\s]',
