@@ -4,8 +4,6 @@ adversarial:
 companynames:
 
 email:
-as@sdfafs.ds
-a@s.com
 
 melicode:
 9133123121
@@ -13,8 +11,6 @@ melicode:
 9133123125
 
 personalname:
-علی
-زهرا
 
 phonenumber:
 9133123121
@@ -26,10 +22,7 @@ phonenumber:
 0913-312-3128
 00989133123129
 09133123120
-09222221133
 
 url:
-sdfafs.ds
-s.com
 
 space:
