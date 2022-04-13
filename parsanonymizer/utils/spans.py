@@ -1,4 +1,5 @@
 import re
+from traceback import print_tb
 from typing import Dict
 import numpy as np
 from parsanonymizer.utils import const
@@ -23,6 +24,7 @@ def create_spans(regexes, text):
 
     # apply regexes on normalized sentence and store extracted markers
     for key in regexes.keys():
+        print(key)
         for regex_value in regexes[key]:
             # apply regex
             matches = list(
@@ -36,6 +38,10 @@ def create_spans(regexes, text):
                 for match in matches:
                     start = match.regs[0][0]
                     end = match.regs[0][1]
+                    if (key=='personalname'):
+                        if any([start>= s[0] and end <= s[1] + 2 for s in spans['address']]):
+                            continue
+                        
                     spans[key].append((start, end))
 
     return spans
