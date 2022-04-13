@@ -3,6 +3,7 @@ from parsanonymizer.utils.pattern_to_regex import Patterns
 from parsanonymizer.utils.spans import create_spans
 from parsanonymizer.utils.spans import merge_spans
 
+from parstdex import Parstdex
 
 class Model(object):
     def __init__(self):
@@ -21,6 +22,9 @@ class Model(object):
         super(Model, self).__init__()
 
     def extract_span(self, text: str):
+        model = Parstdex()
+        time_spans = model.extract_span(text)
+        
 
         # apply normalizer on input text
         text = self.normalizer.normalize(text)
@@ -28,5 +32,6 @@ class Model(object):
         # Create spans
         spans = create_spans(self.regexes, text)
         spans = merge_spans(spans, text)
+        spans = {**spans,**time_spans}
 
         return spans
