@@ -55,6 +55,7 @@ class Annotation:
             'CARDNUM': r'(\\d{2})(-|_|\\s{1,3})?(\\d{4})(-|_|\\s{1,3})?(\\d{4})',
             'ONE_W': fr"""([{const.FA_ALPHABET}]|[0-9])+[^\\s]""",
             'PSPACE': r'[\\s|\\u200c]?',
+            'HOMENUMBER': fr"""(((([+]|00)98)[-\\s]?)|0)?({const.HOME_PRE_NUM})[1-9][0-9]{{7}}""",
         }
 
         return annotation_dict

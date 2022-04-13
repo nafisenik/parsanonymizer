@@ -1,3 +1,5 @@
-NUM10
+ملی<>NUM10
+کد<>NUM10
 کد<>ملی<>NUM10
 PASSNO
+NUM10
