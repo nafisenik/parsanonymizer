@@ -1,2 +1,5 @@
 # patterns which delete from the output
-آسمان تاریک
+اسمPSPACEPRON
+نامPSPACEPRON
+فامیلPSPACEPRON
+نام خانوداگیPSPACEPRON
