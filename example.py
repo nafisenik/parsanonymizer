@@ -66,12 +66,55 @@ keys_persian = {
 }
 
 
-hide_sent = list(sent)
+# hide_sent = list(sent)
+# with open('out2.txt', 'w', encoding='utf-8-sig') as f:
+#     for key in spans.keys():
+#         for span in spans[key]:
+#             start, end = span[0], span[1]
+#             hide_sent[start:end+1] = f'-{keys_persian[key]}-'
+
+#     sent = "".join(hide_sent)       
+#     f.write(sent)
+
+
+result = []
+for key in spans.keys():
+    for span in spans[key]:
+        start, end = span[0], span[1]
+        result.append({'span': (start, end), 'len': end-start, 'cat': key})
+
+result.sort(key=lambda x: x['span'][0])
+
+final_str = ''
+last_index = 0
+for span_info in result:
+    span_start_index = span_info['span'][0]
+    span_end_index = span_info['span'][1]
+    final_str += sent[last_index:span_start_index]
+    final_str += f" *{keys_persian[span_info['cat']]}* "   # sent[span_start_index:span_end_index+1]
+    last_index = span_end_index+1
+
+
 with open('out2.txt', 'w', encoding='utf-8-sig') as f:
-    for key in spans.keys():
-        for span in spans[key]:
-            start, end = span[0], span[1]
-            hide_sent[start:end+1] = f'-{keys_persian[key]}-'
-            print(key)
-    sent = "".join(hide_sent)       
-    f.write(sent)
+    f.write(final_str)
+
+# all_spans_in_one_place = list()
+
+# for key in spans.keys():
+#     for span in spans[key]:
+#         start, end = span[0], span[1]
+#         all_spans_in_one_place.append({'span': (start, end), 'len': end-start, 'cat': key})
+
+# result_list = []
+# mask = [0 for _ in range(len(sent))]
+# all_spans_in_one_place.sort(key=lambda x: x['len'], reverse=True)
+
+# last_index = 0
+# for d in all_spans_in_one_place:
+#     start, end = d['span']
+#     cat = d['cat']
+#     if not any(mask[start:end+1]):
+#         mask[start:end+1] = [1 for _ in range(end-start+1)]
+#         result_list.append((start, end, cat))
+
+# for my_span in sorted(result_list, key=lambda x: x):
