@@ -8,9 +8,17 @@ def merge_spans(spans: Dict, text: str):
     result, encoded = dict(), dict()
 
     for key in spans.keys():
-        encoded[key] = encode_span(spans[key], spans['adversarial'], text)
-        encoded[key] = encode_space(encoded[key], spans['space'])
-        result[key] = find_spans(encoded[key])
+        if key == 'personalname':
+
+            encoded[key] = encode_span(spans[key], spans['adversarial'] + spans['address'], text)
+            encoded[key] = encode_space(encoded[key], spans['space'])
+            result[key] = find_spans(encoded[key])
+        else:
+            
+            encoded[key] = encode_span(spans[key], spans['adversarial'], text)
+            encoded[key] = encode_space(encoded[key], spans['space'])
+            result[key] = find_spans(encoded[key])
+
 
     return result
 

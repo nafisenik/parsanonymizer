@@ -17,9 +17,11 @@ sent = "نفیسه +989133123121 و علی و @sdfafs مح a@s.com مد و sss �
 # 09133123120
 # +989133123120cls
 # """
+
+
 sent = """
-علی احمدی در شهرستان اصفهان شهر فولادشهر به دنیا آمد. 
-علی رضا و زهرا در کشور زیمباوه زندگی می‌کنند. 
+علی احمدی در شهرستان ۱۶ فروردین اصفهان شهر فولادشهر به دنیا آمد. 
+علی رضا و زهرا در کشور سال ۱۳۷۸ زیمباوه زندگی می‌کنند. 
 زندگی در کشور france به نظر سخت است.
 کشور به منطقه‌ای گفته می‌شود که مرز آن با سیاست تعیین شده است.
 من در ۱۶ بهمن ۱۳۷۵ به دنیا منطقه شمالی آمدم.
@@ -35,7 +37,6 @@ sent = """
 شماره تلفن من ۰۹۱۲۳۴۵۶۷۸۹ و شماره خانه‌ علیرضا ۰۲۱۳۳۴۴۵۵۶۶ است.
 خیابان اهواز شهر اهواز بسیار تمیز است.
 """
-
 #sent = '2071-7789-9070-7878 سلام DE12345678901234567890 , AE12345678901234567890, DE12345678901234567890'
 # sent = 'علیپور علی‌پور رفت '
 # sent = "https://google.com"
@@ -47,6 +48,14 @@ spans = m.extract_span(sent)
 with open('out.txt', 'w', encoding='utf-8-sig') as f:
     for key in spans.keys():
         f.write(f"\n{key}:\n")
+        for span in spans[key]:
+            start, end = span[0], span[1]
+            f.write(f'{sent[start: end]}\n')
+
+    for key in spans.keys():
+
+        f.write(f"\n{key}:\n")
+
         for span in spans[key]:
             start, end = span[0], span[1]
             f.write(f'{sent[start: end]}\n')
@@ -98,23 +107,3 @@ for span_info in result:
 with open('out2.txt', 'w', encoding='utf-8-sig') as f:
     f.write(final_str)
 
-# all_spans_in_one_place = list()
-
-# for key in spans.keys():
-#     for span in spans[key]:
-#         start, end = span[0], span[1]
-#         all_spans_in_one_place.append({'span': (start, end), 'len': end-start, 'cat': key})
-
-# result_list = []
-# mask = [0 for _ in range(len(sent))]
-# all_spans_in_one_place.sort(key=lambda x: x['len'], reverse=True)
-
-# last_index = 0
-# for d in all_spans_in_one_place:
-#     start, end = d['span']
-#     cat = d['cat']
-#     if not any(mask[start:end+1]):
-#         mask[start:end+1] = [1 for _ in range(end-start+1)]
-#         result_list.append((start, end, cat))
-
-# for my_span in sorted(result_list, key=lambda x: x):

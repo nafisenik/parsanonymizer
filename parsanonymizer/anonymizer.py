@@ -17,13 +17,14 @@ class Model(object):
                 for regex in self.regexes[key]:
                     f.write(f'{regex}\n')
                 f.write('\n')
-
+        self.parstdex_model = Parstdex()
+        test = self.parstdex_model.extract_span('')
 
         super(Model, self).__init__()
 
     def extract_span(self, text: str):
-        model = Parstdex()
-        time_spans = model.extract_span(text)
+
+        time_spans = self.parstdex_model.extract_span(text)
         
 
         # apply normalizer on input text
