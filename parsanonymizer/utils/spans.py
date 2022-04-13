@@ -9,12 +9,19 @@ def merge_spans(spans: Dict, text: str):
 
     for key in spans.keys():
         if key == 'personalname':
-
             encoded[key] = encode_span(spans[key], spans['adversarial'] + spans['address'], text)
             encoded[key] = encode_space(encoded[key], spans['space'])
             result[key] = find_spans(encoded[key])
         else:
-            
+            encoded[key] = encode_span(spans[key], spans['adversarial'], text)
+            encoded[key] = encode_space(encoded[key], spans['space'])
+            result[key] = find_spans(encoded[key])
+
+        if key == 'url':
+            encoded[key] = encode_span(spans[key], spans['adversarial'] + spans['email'], text)
+            encoded[key] = encode_space(encoded[key], spans['space'])
+            result[key] = find_spans(encoded[key])
+        else:
             encoded[key] = encode_span(spans[key], spans['adversarial'], text)
             encoded[key] = encode_space(encoded[key], spans['space'])
             result[key] = find_spans(encoded[key])
