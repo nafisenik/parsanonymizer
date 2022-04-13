@@ -53,13 +53,6 @@ with open('out.txt', 'w', encoding='utf-8-sig') as f:
             start, end = span[0], span[1]
             f.write(f'{sent[start: end]}\n')
 
-    for key in spans.keys():
-
-        f.write(f"\n{key}:\n")
-
-        for span in spans[key]:
-            start, end = span[0], span[1]
-            f.write(f'{sent[start: end]}\n')
 
 keys_persian = {
     'personalname': 'نام شخص',
