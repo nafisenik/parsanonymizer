@@ -1,4 +1,4 @@
-import re
+import regex as re
 import os
 from parsanonymizer.utils import const
 
@@ -43,8 +43,8 @@ class Annotation:
     @staticmethod
     def create_regex_annotation_dict():
         annotation_dict = {
-            'ACCNUM': fr"""({const.SHOMARE})? ({const.HESAB}) .{{0,15}} [0-9]{{8,16}}""",
-            'SHABA': r"""IR[0-9]{22,24}""",
+            #'ACCNUM': fr"""({const.SHOMARE})? ({const.HESAB}) .{{0,15}} [0-9]{{8,16}}""",
+            #'SHABA': r"""IR[0-9]{22,24}""",
             'NUM10': r'\\d{10}', 
             'NUMR10': r'[0-9]{10}',
             'PASSNO': r'[A-Z][0-9]{8}',
@@ -54,7 +54,8 @@ class Annotation:
             'PHONENUMBER': r"""(((([+]|00)98)[-\\s]?)|0)?9\\d{2}[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}(?!\\d)""",
             'CARDNUM': r'(\\d{2})(-|_|\\s{1,3})?(\\d{4})(-|_|\\s{1,3})?(\\d{4})',
             'ONE_W': r"""(\\w)+[^\\s]""",
-            'ALL_W':r'(.)*'
+            'ALL_W': r'(.)*',
+            'PSPACE': r'[\\s|\\u200c]?'
 
         }
 
