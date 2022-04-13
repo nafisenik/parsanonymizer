@@ -37,7 +37,6 @@ sent = """
 شماره تلفن من ۰۹۱۲۳۴۵۶۷۸۹ و شماره خانه‌ علیرضا ۰۲۱۳۳۴۴۵۵۶۶ است.
 خیابان اهواز شهر اهواز بسیار تمیز است.
 """
-
 #sent = '2071-7789-9070-7878 سلام DE12345678901234567890 , AE12345678901234567890, DE12345678901234567890'
 # sent = 'علیپور علی‌پور رفت '
 # sent = "https://google.com"
@@ -48,6 +47,11 @@ sent = """
 spans = m.extract_span(sent)
 
 with open('out.txt', 'w', encoding='utf-8-sig') as f:
+    for key in spans.keys():
+        f.write(f"\n{key}:\n")
+        for span in spans[key]:
+            start, end = span[0], span[1]
+            f.write(f'{sent[start: end]}\n')
 
     for key in spans.keys():
 
@@ -56,7 +60,6 @@ with open('out.txt', 'w', encoding='utf-8-sig') as f:
         for span in spans[key]:
             start, end = span[0], span[1]
             f.write(f'{sent[start: end]}\n')
-
 
 keys_persian = {
     'personalname': 'نام شخص',
@@ -67,26 +70,32 @@ keys_persian = {
     'companynames': 'اسم شرکت',
     'email': 'ایمیل',
     'melicode': 'کد ملی',
-    'phonenumber': 'شماره موبایل',
+    'phonenumber': 'شماره تماس',
     'url': 'آدرس سایت',
     'time': 'زمان',
     'licensenumber': 'شماره گواهینامه'
 }
 
 
-all_spans = {}
+result = []
 for key in spans.keys():
     for span in spans[key]:
         start, end = span[0], span[1]
-        all_spans[tuple((start, end))] = key
+        result.append({'span': (start, end), 'len': end-start, 'cat': key})
 
-sorted_span = sorted(list(all_spans.keys()), key=lambda x: x[0])
-anonymized_text = ""
+result.sort(key=lambda x: x['span'][0])
+
+final_str = ''
 last_index = 0
+for span_info in result:
+    span_start_index = span_info['span'][0]
+    span_end_index = span_info['span'][1]
+    final_str += sent[last_index:span_start_index]
+    final_str += f"<#{keys_persian[span_info['cat']]}#> "   # sent[span_start_index:span_end_index+1]
+    last_index = span_end_index+1
+
+final_str += sent[last_index:]
+
 with open('out2.txt', 'w', encoding='utf-8-sig') as f:
-        for span in sorted_span:
-            anonymized_text += sent[last_index:span[0]]
-            anonymized_text += f' <#{keys_persian[all_spans[span]]}> '
-            last_index = span[1] + 1
-        anonymized_text += sent[last_index:]      
-        f.write(anonymized_text)
+    f.write(final_str)
+

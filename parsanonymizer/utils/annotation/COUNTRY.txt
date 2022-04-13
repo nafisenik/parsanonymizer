@@ -250,7 +250,6 @@
 آفریقای جنوبی
 زامبیا
 زیمباوه
-
 # country names in english (capital first letter)
 Afghanistan
 Albania
@@ -447,7 +446,6 @@ Vietnam
 Yemen
 Zambia
 Zimbabw
-
 # country names in english (lowercase)
 afghanistan
 albania
