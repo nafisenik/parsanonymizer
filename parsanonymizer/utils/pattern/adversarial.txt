@@ -3,6 +3,9 @@
 نامPSPACEPRON
 فامیلPSPACEPRON
 نام خانوداگیPSPACEPRON
+ADV_ACCNUM
+ADV_NC
+ADV_LICNUM
 
 
 منطقه‌ای

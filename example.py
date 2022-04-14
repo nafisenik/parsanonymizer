@@ -43,6 +43,7 @@ sent = """
 # sent = "this is my حات جطرو https://google.com/hi سلام hello"
 #sent = "نفیسه +989133123121 و علی و @sdfafs مح a@s.com مد و sss زهرا  09222221133- محمدی ss.sawe_c@sdgm.c به شرکت گوگل و یاهو https://google.com رفتند و   1237651212 حسن جعفری و اکبری و hello.com محمدی sss@sss.com و امیری به آقای محمد حسینی سلام کردند."
 
+# sent ='کدملی من ۱۱۳۰۳۹۴۷۸۹ است'
 spans = m.extract_span(sent)
 
 with open('out.txt', 'w', encoding='utf-8-sig') as f:
@@ -52,38 +53,21 @@ with open('out.txt', 'w', encoding='utf-8-sig') as f:
             start, end = span[0], span[1]
             f.write(f'{sent[start: end]}\n')
 
-    for key in spans.keys():
-
-        f.write(f"\n{key}:\n")
-
-        for span in spans[key]:
-            start, end = span[0], span[1]
-            f.write(f'{sent[start: end]}\n')
 
 keys_persian = {
-    'personalname': 'نام شخصی',
+    'personalname': 'نام شخص',
     'date': 'تاریخ',
     'address': 'آدرس',
     'datetime': 'تاریخ و ساعت',
-    'bankcard': 'شماره کارت',
+    'bankcard': 'اطلاعات حساب',
     'companynames': 'اسم شرکت',
     'email': 'ایمیل',
     'melicode': 'کد ملی',
     'phonenumber': 'شماره تماس',
     'url': 'آدرس سایت',
     'time': 'زمان',
+    'licensenumber': 'شماره گواهینامه'
 }
-
-
-# hide_sent = list(sent)
-# with open('out2.txt', 'w', encoding='utf-8-sig') as f:
-#     for key in spans.keys():
-#         for span in spans[key]:
-#             start, end = span[0], span[1]
-#             hide_sent[start:end+1] = f'-{keys_persian[key]}-'
-
-#     sent = "".join(hide_sent)       
-#     f.write(sent)
 
 
 result = []
@@ -100,7 +84,7 @@ for span_info in result:
     span_start_index = span_info['span'][0]
     span_end_index = span_info['span'][1]
     final_str += sent[last_index:span_start_index]
-    final_str += f" *{keys_persian[span_info['cat']]}* "   # sent[span_start_index:span_end_index+1]
+    final_str += f"<#{keys_persian[span_info['cat']]}#> "   # sent[span_start_index:span_end_index+1]
     last_index = span_end_index+1
 
 final_str += sent[last_index:]
